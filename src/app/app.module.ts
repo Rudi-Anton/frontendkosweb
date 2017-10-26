@@ -15,6 +15,12 @@ import { PenjagaeditComponent } from './penjaga/penjagaedit/penjagaedit.componen
 import { GajipenjagaComponent } from './gajipenjaga/gajipenjaga.component';
 import { FiturkosComponent } from './fiturkos/fiturkos.component';
 import { GajipenjagaeditComponent } from './gajipenjaga/gajipenjagaedit/gajipenjagaedit.component';
+import { KosComponent } from './kos/kos.component';
+import { KamarComponent } from './kamar/kamar.component';
+import { PenghuniComponent } from './penghuni/penghuni.component';
+import { KoscreateComponent } from './kos/koscreate/koscreate.component';
+import { KosdetailComponent } from './kos/kosdetail/kosdetail.component';
+import { KoseditComponent } from './kos/kosedit/kosedit.component';
 
 let routes : Routes = [
   {path:"penjaga",component:PenjagaComponent},
@@ -24,6 +30,7 @@ let routes : Routes = [
   {path:"gajipenjaga",component:GajipenjagaComponent},
   {path:"gajiedit/:id",component:GajipenjagaeditComponent},
   {path:"fiturkos",component:FiturkosComponent},
+  {path:"kos",component:KosComponent}
  ];
 
 @NgModule({
@@ -39,6 +46,12 @@ let routes : Routes = [
     GajipenjagaComponent,
     FiturkosComponent,
     GajipenjagaeditComponent,
+    KosComponent,
+    KamarComponent,
+    PenghuniComponent,
+    KoscreateComponent,
+    KosdetailComponent,
+    KoseditComponent,
   ],
   imports: [
     BrowserModule,
