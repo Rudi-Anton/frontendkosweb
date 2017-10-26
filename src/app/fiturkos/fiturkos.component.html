@@ -1,0 +1,50 @@
+<div class="panel panel-success">
+    <h1 align="center">Data Fiturkos</h1>
+    <hr>
+    &ensp;<a class="btn btn-info" href [routerLink]="['/fiturkoscreate']"><span class="glyphicon glyphicon-plus"></span></a>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <h3>Kode Fiturkos</h3>
+                </td>
+                <td>
+                    <h3>Nama Fiturkos</h3>
+                </td>
+                <td>
+                    <h3>Aksi</h3>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of dataFiturkos">
+                <td>
+                    <h4>{{item.KdKos}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.Internet}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.KamarMandi}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.TV}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.Kulkas}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.Air}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.Listrik}}</h4>
+                </td>
+                <td>
+                    <a class="btn btn-success" href [routerLink]="['/fiturkosdetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href [routerLink]="['/fiturkosedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <button class="btn btn-danger" type="button" (click)="fiturkosDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

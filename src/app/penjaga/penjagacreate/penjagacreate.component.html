@@ -1,0 +1,25 @@
+
+  <h1 align="center">Create Jenis Obat</h1><br/>
+<form  (ngSubmit) = "PenjagaCreate(dataPenjagaCreate)" class="form-horizontal">
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Kode Penjaga</label>
+        <div class="col-sm-9">
+            <input [(ngModel)]="dataPenjagaCreate.KdPenjaga" type="text" name="KdPenjaga" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Kode Kos</label>
+        <div class="col-sm-9">
+            <input [(ngModel)]="dataPenjagaCreate.KdKos" name="KdKos" type="text" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Nama Penjaga</label>
+        <div class="col-sm-9">
+            <input [(ngModel)]="dataPenjagaCreate.NamaPenjaga" name="NamaPenjaga" type="text" class="form-control">
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit">Save</button>
+</form>
+        
+    

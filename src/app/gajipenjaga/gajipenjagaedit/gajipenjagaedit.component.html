@@ -1,0 +1,19 @@
+<div>
+  <h1 align="center">Edit Gaji Penjaga</h1>
+  <br/>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-1 control-label">Kategori Kos</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="dataGajiEdit.KategoriKos" name="KategoriKos" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-1 control-label">Gaji Penjaga</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="dataGajiEdit.Gaji" name="Gaji" type="text" class="form-control">
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="EditGaji(this.dataGajiEdit._id)">Save</button>
+  </form>
+</div>

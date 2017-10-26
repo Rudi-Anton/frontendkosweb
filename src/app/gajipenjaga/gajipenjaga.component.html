@@ -1,0 +1,31 @@
+<div class="panel panel-success">
+    <h1 align="center">Data Gaji</h1>
+    <hr><table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <h3>Kategori Kos</h3>
+                </td>
+                <td>
+                    <h3>Gaji</h3>
+                </td>
+                <td>
+                    <h3>Aksi</h3>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of dataGaji">
+                <td>
+                    <h4>{{item.KategoriKos}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.Gaji}}</h4>
+                </td>
+                <td>
+                    <a class="btn btn-info" href [routerLink]="['/gajiedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

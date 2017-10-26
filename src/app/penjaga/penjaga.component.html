@@ -1,0 +1,35 @@
+<div class="panel panel-success">
+    <h1 align="center">Data Penjaga</h1>
+    <hr>
+    &ensp;<a class="btn btn-info" href [routerLink]="['/penjagacreate']"><span class="glyphicon glyphicon-plus"></span></a>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <h3>Kode Penjaga</h3>
+                </td>
+                <td>
+                    <h3>Nama Penjaga</h3>
+                </td>
+                <td>
+                    <h3>Aksi</h3>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of dataPenjaga">
+                <td>
+                    <h4>{{item.KdPenjaga}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.NamaPenjaga}}</h4>
+                </td>
+                <td>
+                    <a class="btn btn-success" href [routerLink]="['/penjagadetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href [routerLink]="['/penjagaedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <button class="btn btn-danger" type="button" (click)="PenjagaDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
