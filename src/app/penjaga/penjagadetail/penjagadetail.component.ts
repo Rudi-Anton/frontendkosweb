@@ -21,7 +21,7 @@ export class PenjagadetailComponent implements OnInit {
   ngOnInit() {
     this.idPenjaga;
    
-      this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + this.idPenjaga)
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + this.idPenjaga + "?" + document.cookie)
         .subscribe((res: Response) => {
           this.dataPenjagaDetail = res.json();
           

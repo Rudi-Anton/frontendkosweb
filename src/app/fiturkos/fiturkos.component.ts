@@ -15,13 +15,13 @@ export class FiturkosComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos')
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos' + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataFiturkos = res.json();
       })
   }
   FiturkosDelete(idFiturkos) {
-    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idFiturkos)
+    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idFiturkos + "?" + document.cookie)
       .subscribe((res: Response) => {
         window.location.href = "./fiturkos";
       })

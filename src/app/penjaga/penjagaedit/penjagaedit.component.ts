@@ -21,14 +21,14 @@ export class PenjagaeditComponent implements OnInit {
   ngOnInit() {
     this.idPenjaga;
     this.dataPenjagaEdit;
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + this.idPenjaga)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + this.idPenjaga + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataPenjagaEdit = res.json();
       })
   }
 
   EditPenjaga(id) {
-    this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + id, this.dataPenjagaEdit)
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + id + "?" + document.cookie, this.dataPenjagaEdit)
       .subscribe((res: Response) => {
         window.location.href = "./penjaga";
       })

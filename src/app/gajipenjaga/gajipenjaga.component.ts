@@ -14,7 +14,7 @@ export class GajipenjagaComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga')
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga' + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataGaji = res.json();
       })

@@ -16,12 +16,13 @@ export class PenjagacreateComponent implements OnInit {
 
   ngOnInit() {
     this.dataPenjagaCreate = new Data();
+    
   }
   PenjagaCreate(dataPenjagaCreate) {
+
     let header = new Headers({ 'Content-Type': 'application/json' });
     let opsi = new RequestOptions({ headers: header });
-    //let data = JSON.stringify({kdPenjaga : kode, NamaPenjaga : nama});
-    debugger;
+    //debugger;
     this.http.post('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + '?' + document.cookie, JSON.stringify(this.dataPenjagaCreate), opsi)
       .subscribe((res: Response) => {
         window.location.href = "./penjaga";

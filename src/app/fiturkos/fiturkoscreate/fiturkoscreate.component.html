@@ -1,0 +1,54 @@
+<h1 align="center">
+  Create Fiturkos</h1><br/>
+<form (ngSubmit)="FiturkosCreate(dataFiturkosCreate)" class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Kode Fiturkos</label>
+    <div class="col-sm-5">
+      <input [(ngModel)]="dataFiturkosCreate.KdKos" type="text" name="KdKos" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Internet</label>
+    <div class="col-sm-5">
+      <input [(ngModel)]="dataFiturkosCreate.Internet" name="Internet" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Kamar Mandi</label>
+    <div class="col-sm-5">
+      <input [(ngModel)]="dataFiturkosCreate.KamarMandi" name="Kamarmandi" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Air</label>
+    <div class="col-sm-5">
+      <input [(ngModel)]="dataFiturkosCreate.Air" name="Air" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Listrik</label>
+    <div class="col-sm-5">
+      <input [(ngModel)]="dataFiturkosCreate.Listrik" name="Listrik" type="text" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Kulkas</label>
+    <div class="col-sm-2">
+      <input [(ngModel)]="dataFiturkosCreate.Kulkas" name="Kulkas" type="radio" value="true" class="col-sm-4">True
+    </div><br/>
+    <div class="col-sm-2">
+      <input [(ngModel)]="dataFiturkosCreate.Kulkas" name="Kulkas" type="radio" value="false" class="col-sm-4">False
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">TV</label>
+    <div class="col-sm-2">
+      <input [(ngModel)]="dataFiturkosCreate.TV" name="TV" type="radio" value="true" class="col-sm-4">True
+    </div><br/>
+    <div class="col-sm-2">
+      <input [(ngModel)]="dataFiturkosCreate.TV" name="TV" type="radio" value="false" class="col-sm-4">False
+    </div>
+  </div>
+  <button class="btn btn-success" type="submit">Save</button>
+</form>

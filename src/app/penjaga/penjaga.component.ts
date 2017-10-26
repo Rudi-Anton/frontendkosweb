@@ -14,13 +14,13 @@ export class PenjagaComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga')
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga' + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataPenjaga = res.json();
       })
   }
   PenjagaDelete(idPenjaga) {
-    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + idPenjaga)
+    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + idPenjaga + "?" + document.cookie)
       .subscribe((res: Response) => {
         window.location.href = "./penjaga";
       })

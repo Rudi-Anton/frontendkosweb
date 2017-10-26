@@ -15,8 +15,13 @@ import { PenjagaeditComponent } from './penjaga/penjagaedit/penjagaedit.componen
 import { GajipenjagaComponent } from './gajipenjaga/gajipenjaga.component';
 import { FiturkosComponent } from './fiturkos/fiturkos.component';
 import { GajipenjagaeditComponent } from './gajipenjaga/gajipenjagaedit/gajipenjagaedit.component';
+import { FiturkosdetailComponent } from './fiturkos/fiturkosdetail/fiturkosdetail.component';
+import { FiturkoseditComponent } from './fiturkos/fiturkosedit/fiturkosedit.component';
+import { FiturkoscreateComponent } from './fiturkos/fiturkoscreate/fiturkoscreate.component';
+import { LoginComponent } from './login/login.component';
 
 let routes : Routes = [
+  {path:"login",component:LoginComponent},
   {path:"penjaga",component:PenjagaComponent},
   {path:"penjagacreate",component:PenjagacreateComponent},
   {path:"penjagaedit/:id",component:PenjagaeditComponent},
@@ -24,6 +29,9 @@ let routes : Routes = [
   {path:"gajipenjaga",component:GajipenjagaComponent},
   {path:"gajiedit/:id",component:GajipenjagaeditComponent},
   {path:"fiturkos",component:FiturkosComponent},
+  {path:"fiturkoscreate",component:FiturkoscreateComponent},
+  {path:"fiturkosdetail/:id",component:FiturkosdetailComponent},
+  {path:"fiturkosedit/:id",component:FiturkoseditComponent},
  ];
 
 @NgModule({
@@ -39,6 +47,10 @@ let routes : Routes = [
     GajipenjagaComponent,
     FiturkosComponent,
     GajipenjagaeditComponent,
+    FiturkosdetailComponent,
+    FiturkoseditComponent,
+    FiturkoscreateComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

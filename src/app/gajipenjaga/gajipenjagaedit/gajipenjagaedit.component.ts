@@ -20,14 +20,14 @@ export class GajipenjagaeditComponent implements OnInit {
   ngOnInit() {
     this.idGaji;
     this.dataGajiEdit;
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga/' + this.idGaji)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga/' + this.idGaji + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataGajiEdit = res.json();
       })
   }
 
   EditGaji(id) {
-    this.http.put('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga/' + id, this.dataGajiEdit)
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga/' + id + "?" + document.cookie, this.dataGajiEdit)
       .subscribe((res: Response) => {
         window.location.href = "./gajipenjaga";
       })
