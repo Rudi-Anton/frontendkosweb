@@ -19,6 +19,10 @@ import { FiturkosdetailComponent } from './fiturkos/fiturkosdetail/fiturkosdetai
 import { FiturkoseditComponent } from './fiturkos/fiturkosedit/fiturkosedit.component';
 import { FiturkoscreateComponent } from './fiturkos/fiturkoscreate/fiturkoscreate.component';
 import { LoginComponent } from './login/login.component';
+import { KosComponent } from './kos/kos.component';
+import { KoscreateComponent } from './kos/koscreate/koscreate.component';
+import { KosdetailComponent } from './kos/kosdetail/kosdetail.component';
+import { KoseditComponent } from './kos/kosedit/kosedit.component';
 
 let routes : Routes = [
   {path:"login",component:LoginComponent},
@@ -32,6 +36,7 @@ let routes : Routes = [
   {path:"fiturkoscreate",component:FiturkoscreateComponent},
   {path:"fiturkosdetail/:id",component:FiturkosdetailComponent},
   {path:"fiturkosedit/:id",component:FiturkoseditComponent},
+  {path:"kos",component:KosComponent}
  ];
 
 @NgModule({
@@ -51,6 +56,10 @@ let routes : Routes = [
     FiturkoseditComponent,
     FiturkoscreateComponent,
     LoginComponent,
+    KosComponent,
+    KoscreateComponent,
+    KosdetailComponent,
+    KoseditComponent,
   ],
   imports: [
     BrowserModule,
