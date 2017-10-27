@@ -36,7 +36,11 @@ let routes : Routes = [
   {path:"fiturkoscreate",component:FiturkoscreateComponent},
   {path:"fiturkosdetail/:id",component:FiturkosdetailComponent},
   {path:"fiturkosedit/:id",component:FiturkoseditComponent},
-  {path:"kos",component:KosComponent}
+  {path:"kos",component:KosComponent},
+  {path:"koscreate",component:KoscreateComponent},
+  {path:"kosdetail/:id",component:KosdetailComponent},
+  {path:"kosedit/:id",component:KoseditComponent}
+  
  ];
 
 @NgModule({

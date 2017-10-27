@@ -1,3 +1,40 @@
-<p>
-  kosedit works!
-</p>
+
+    <div>
+      <h1 align="center">Edit Kos</h1>
+            <br/>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">Kode Kos</label>
+                    <div class="col-sm-10">
+                        <input [(ngModel)]="dataKosEdit.KdKos" name="KdKos" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">Nama Kos</label>
+                    <div class="col-sm-10">
+                        <input [(ngModel)]="dataKosEdit.NamaKos" name="NamaKos" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-1 control-label">Kategori Kos</label>
+                  <div class="col-sm-10">
+                      <input [(ngModel)]="dataKosEdit.NamaKos" name="NamaKos" type="text" class="form-control">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-1 control-label">Jumlah Kamar</label>
+                <div class="col-sm-10">
+                    <input [(ngModel)]="dataKosEdit.NamaKos" name="NamaKos" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 control-label">Lokasi</label>
+              <div class="col-sm-10">
+                  <input [(ngModel)]="dataKosEdit.Latitude" name="Latitude" type="text" class="form-control">
+                  <input [(ngModel)]="dataKosEdit.Longitude" name="Longitude" type="text" class="form-control">
+                  
+                </div>
+          </div>
+                    <button class="btn btn-success" (click)="EditKos(this.dataKosEdit._id)">Save</button>
+            </form>
+        </div>
