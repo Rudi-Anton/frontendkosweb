@@ -14,13 +14,13 @@ export class KosComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos')
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos' + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataKos = res.json();
       })
   }
   KosDelete(idKos) {
-    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos)
+    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
       .subscribe((res: Response) => {
         window.location.href = "./kos";
       })

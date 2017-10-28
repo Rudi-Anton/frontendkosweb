@@ -1,3 +1,5 @@
+
+
 <form  (ngSubmit) = "Login(dataLogin)" class="form-horizontal">
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
@@ -8,7 +10,7 @@
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-9">
-            <input [(ngModel)]="dataLogin.Password" name="Password" type="text" class="form-control">
+            <input [(ngModel)]="dataLogin.Password" name="Password" id="password" onmousedown="this.type='text'" onmouseup="this.type='password'" onmousemove="this.type='password'" class="form-control">
         </div>
     </div>
     <button class="btn btn-success" type="submit">Login</button>

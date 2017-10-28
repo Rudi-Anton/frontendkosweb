@@ -16,12 +16,13 @@ export class KoscreateComponent implements OnInit {
 
   ngOnInit() {
     this.dataKosCreate = new Data();
+    
   }
   KosCreate(dataKosCreate) {
+
     let header = new Headers({ 'Content-Type': 'application/json' });
     let opsi = new RequestOptions({ headers: header });
-    //let data = JSON.stringify({kdKos : kode, NamaKos : nama});
-    debugger;
+    //debugger;
     this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + document.cookie, JSON.stringify(this.dataKosCreate), opsi)
       .subscribe((res: Response) => {
         window.location.href = "./kos";

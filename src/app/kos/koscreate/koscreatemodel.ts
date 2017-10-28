@@ -7,6 +7,8 @@ export class Data {
     public NamaKos: string;
     public KategoriKos: string;
     public JmlKamar:number;
-    public Location: string;
+    public Location:string;
+    public Latitude: number;
+    public Longitude: number;
     public Pendapatan: number;
 }

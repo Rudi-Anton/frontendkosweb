@@ -15,15 +15,12 @@
                     <h3>Lokasi</h3>
                 </td>
                 <td>
-                    <h3>Pendapatan</h3>
-                </td>
-                <td>
                     <h3>Aksi</h3>
                 </td>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of dataPenjaga">
+            <tr *ngFor="let item of dataKos">
                 <td>
                     <h4>{{item.KdKos}}</h4>
                 </td>
@@ -31,15 +28,12 @@
                         <h4>{{item.NamaKos}}</h4>
                     </td>
                 <td>
-                    <h4>{{item.Lokasi}}</h4>
+                    <h4>{{item.Location}}</h4>
                 </td>
                 <td>
-                    <h4>{{item.Pendapatan}}</h4>
-                </td>
-                <td>
-                    <a class="btn btn-success" href [routerLink]="['/penjagadetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
-                    <a class="btn btn-info" href [routerLink]="['/penjagaedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <button class="btn btn-danger" type="button" (click)="PenjagaDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                    <a class="btn btn-success" href [routerLink]="['/kosdetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href [routerLink]="['/kosedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <button class="btn btn-danger" type="button" (click)="KosDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </td>
             </tr>
         </tbody>
