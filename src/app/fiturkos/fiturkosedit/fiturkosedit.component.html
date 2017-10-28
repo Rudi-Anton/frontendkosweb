@@ -3,33 +3,57 @@
   <br/>
   <form class="form-horizontal">
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-1 control-label">Kode Kos</label>
-      <div class="col-sm-10">
+      <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
+      <div class="col-sm-6">
         <input type="text" class="form-control" id="kdKos" value={{dataFiturkosEdit.KdKos}}>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-1 control-label">Kode Kos</label>
-      <div class="col-sm-10">
+      <label for="inputEmail3" class="col-sm-3 control-label">Internet</label>
+      <div class="col-sm-6">
         <input type="text" class="form-control" id="Internet" value={{dataFiturkosEdit.Internet}}>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-1 control-label">Kamar Mandi</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="KamarMandi" value={{dataFiturkosEdit.KamarMandi}}>
+      <label for="inputEmail3" class="col-sm-3 control-label">Kamar Mandi</label>
+      <div class="col-sm-6">
+        <select [(ngModel)]="dataFiturkosEdit.KamarMandi" name="KamarMandi" type="text" class="form-control" id="KamarMandi">
+          
+          <option value="Dalam">Dalam</option>
+          <option value="Luar">Luar</option>
+        </select>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-1 control-label">Air</label>
-      <div class="col-sm-10">
+      <label for="inputEmail3" class="col-sm-3 control-label">Air</label>
+      <div class="col-sm-6">
         <input type="text" class="form-control" id="Air" value={{dataFiturkosEdit.Air}}>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-1 control-label">Listrik</label>
-      <div class="col-sm-10">
+      <label for="inputEmail3" class="col-sm-3 control-label">Listrik</label>
+      <div class="col-sm-6">
         <input type="text" class="form-control" id="Listrik" value={{dataFiturkosEdit.Listrik}}>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">TV</label>
+      <div class="col-sm-6">
+        <select [(ngModel)]="dataFiturkosEdit.TV" name="TV" type="text" class="form-control" id="TV">
+          <option *ngFor="let item of dataFiturkosEdit" [ngValue]="default">{{item.TV}}</option>
+          <option value="true">Ada</option>
+          <option value="false">Tidak Ada</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">Kulkas</label>
+      <div class="col-sm-6">
+        <select [(ngModel)]="dataFiturkosEdit.Kulkas" name="Kulkas" type="text" class="form-control" id="Kulkas">
+          <option *ngFor="let item of dataFiturkosEdit" [ngValue]="default">{{item.Kulkas}}</option>
+          <option value="true">Ada</option>
+          <option value="false">Tidak Ada</option>
+        </select>
       </div>
     </div>
     <button class="btn btn-success" (click)="EditFiturkos(this.dataFiturkosEdit._id)">Save</button>
