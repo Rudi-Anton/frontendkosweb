@@ -1,0 +1,44 @@
+<div class="panel panel-success">
+  <h1 align="center">Data Kamar Kos</h1>
+  <hr>
+  &ensp;<a class="btn btn-info" href [routerLink]="['/kamarcreate']"><span class="glyphicon glyphicon-plus"></span></a>
+  <table class="table">
+      <thead>
+          <tr>
+              <td>
+                  <h3>Kode Kos</h3>
+              </td>
+              <td>
+                  <h3>Kode Kamar</h3>
+              </td>
+             
+              <td>
+                  <h3>Tagihan</h3>
+              </td>
+              <td>
+                  <h3>Aksi</h3>
+              </td>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of dataKamar">
+              <td>
+                  <h4>{{item.KdKos}}</h4>
+          </td>
+              <td>
+                  <h4>{{item.KdKamarKos}}</h4>
+              </td>
+              
+              
+            <td>
+              <h4>{{item.Tagihan}}</h4>
+          </td>
+              <td>
+                  <a class="btn btn-success" href [routerLink]="['/kamardetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                  <a class="btn btn-info" href [routerLink]="['/kamaredit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                  <button class="btn btn-danger" type="button" (click)="KamarDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

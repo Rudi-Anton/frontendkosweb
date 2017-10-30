@@ -1,0 +1,46 @@
+<div class="panel panel-success">
+    <h1 align="center">Data Penghuni</h1>
+    <hr>
+    &ensp;<a class="btn btn-info" href [routerLink]="['/penghunicreate']"><span class="glyphicon glyphicon-plus"></span></a>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <h3>Kode Kos</h3>
+                </td>
+                <td>
+                    <h3>Kode Kamar</h3>
+                </td>
+                
+                <td>
+                    <h3>Nama</h3>
+                </td>
+                <td>
+                    <h3>Aksi</h3>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of dataPenghuni">
+
+                <td>
+                    <h4>{{item.KdKos}}</h4>
+            </td>
+                <td>
+                    <h4>{{item.KdKamarKos}}</h4>
+                </td>
+               
+                
+              <td>
+                <h4>{{item.NamaPenghuni}}</h4>
+            </td>
+                <td>
+                    <a class="btn btn-success" href [routerLink]="['/penghunidetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info" href [routerLink]="['/penghuniedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <button class="btn btn-danger" type="button" (click)="PenghuniDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
