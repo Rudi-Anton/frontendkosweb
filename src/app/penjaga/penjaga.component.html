@@ -1,7 +1,7 @@
 <div class="panel panel-success">
     <h1 align="center">Data Penjaga</h1>
-    <hr>
-    &ensp;<a class="btn btn-info" href [routerLink]="['/penjagacreate']"><span class="glyphicon glyphicon-plus"></span></a>
+    <hr> &ensp;
+    <a class="btn btn-info" (click)="PenjagaData()" data-toggle="modal" data-target="#myModalCreate"><span class="glyphicon glyphicon-plus"></span></a>
     <table class="table">
         <thead>
             <tr>
@@ -25,11 +25,135 @@
                     <h4>{{item.NamaPenjaga}}</h4>
                 </td>
                 <td>
-                    <a class="btn btn-success" href [routerLink]="['/penjagadetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
-                    <a class="btn btn-info" href [routerLink]="['/penjagaedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-success" (click)="PenjagaDetail(item._id)" data-toggle="modal" data-target="#myModalDetail"><span class="glyphicon glyphicon-search"></span></a>
+                    <a class="btn btn-info"  (click)="EditData(item._id)" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-pencil"></span></a>
                     <button class="btn btn-danger" type="button" (click)="PenjagaDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<!-- Modal create -->
+<div id="myModalCreate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tambah Penjaga</h4>
+            </div>
+            <form role="form" *ngIf="dataPenjagaCreate">
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Kode Penjaga</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaCreate.KdPenjaga" type="text" name="KdPenjaga" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaCreate.KdKos" name="KdKos" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Nama Penjaga</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaCreate.NamaPenjaga" name="NamaPenjaga" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="PenjagaCreate(dataPenjagaCreate)" type="submit">Tambah</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Detail -->
+<div id="myModalDetail" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detail Penjaga</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataPenjagaDetail">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kode Penjaga</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="kdPenjaga" value={{dataPenjagaDetail.KdPenjaga}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="KdKos" value={{dataPenjagaDetail.KdKos}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Nama Penjaga</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="namaPenjaga" value={{dataPenjagaDetail.NamaPenjaga}} readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Edit -->
+<div id="myModalEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Penjaga</h4>
+            </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" *ngIf="dataPenjagaEdit">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Kode Penjaga</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaEdit.KdPenjaga" name="KdPenjaga" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Kode Kos</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaEdit.KdKos" name="KdKos" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nama Penjaga</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaEdit.NamaPenjaga" name="NamaPenjaga" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="PenjagaUbah(dataPenjagaEdit._id,dataPenjagaEdit)" type="submit">Ubah</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+
+    </div>
 </div>
