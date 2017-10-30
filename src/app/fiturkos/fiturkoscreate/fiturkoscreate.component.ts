@@ -22,7 +22,7 @@ export class FiturkoscreateComponent implements OnInit {
     let opsi = new RequestOptions({ headers: header });
     //let data = JSON.stringify({kdFiturkos : kode, NamaFiturkos : nama});
     debugger;
-    this.http.post('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + '?' + document.cookie, JSON.stringify(this.dataFiturkosCreate), opsi)
+    this.http.post('https://kosannarutosasuke.herokuapp.com/api/fiturkos' + '?' + document.cookie, JSON.stringify(this.dataFiturkosCreate), opsi)
       .subscribe((res: Response) => {
         window.location.href = "./fiturkos";
         debugger;
