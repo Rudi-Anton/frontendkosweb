@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
+import { ActivatedRoute, Routes } from '@angular/router';
+import { Data } from './kosmodel';
 
 @Component({
   selector: 'app-kos',
@@ -8,10 +10,13 @@ import { Http, Response } from '@angular/http';
 })
 export class KosComponent implements OnInit {
 
+  dataKosCreate: Data;
   dataKos: Object;
+  dataKosDetail: Object;
+  dataKosEdit: Object;
   idKos: String;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos' + "?" + document.cookie)
@@ -19,11 +24,63 @@ export class KosComponent implements OnInit {
         this.dataKos = res.json();
       })
   }
-  KosDelete(idKos) {
-    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
+
+  KosData() {
+    this.dataKosCreate = new Data();
+  }
+
+  KosCreate(dataKosCreate) {
+    if (dataKosCreate.KdKos==null || dataKosCreate.KdKos==null || dataKosCreate.NamaKos==null) { 
+      alert("Data Masih ada yang kosong");
+    }
+    else {
+      let header = new Headers({ 'Content-Type': 'application/json' });
+      let opsi = new RequestOptions({ headers: header });
+      //debugger;
+      this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + document.cookie, JSON.stringify(this.dataKosCreate), opsi)
+        .subscribe((res: Response) => {
+          window.location.href = "./kos";
+          debugger;
+        })
+    }
+  }
+
+  KosDetail(idKos) {
+    debugger;
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
       .subscribe((res: Response) => {
-        window.location.href = "./kos";
+        this.dataKosDetail = res.json();
+
       })
   }
 
+
+  KosDelete(idKos) {
+    if (confirm("Apakah yakin ingin menghapus ini?") == true) {
+      this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
+        .subscribe((res: Response) => {
+          window.location.href = "./kos";
+        })
+    }
+  }
+
+  KosEdit(idKos) {
+    debugger;
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
+      .subscribe((res: Response) => {
+        this.dataKosEdit = res.json();
+      })
+  }
+
+  KosUbah(id,dataKosEdit) {
+    if (dataKosEdit.KdKos=="" || dataKosEdit.KdKos=="" || dataKosEdit.NamaKos=="") { 
+      alert("Data Masih ada yang kosong");
+    }
+    else {
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + id + "?" + document.cookie, dataKosEdit)
+      .subscribe((res: Response) => {
+        window.location.href = "./kos";
+      })
+    }
+  }
 }

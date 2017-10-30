@@ -64,7 +64,7 @@ export class PenjagaComponent implements OnInit {
     }
   }
 
-  EditData(idPenjaga) {
+  PenjagaEdit(idPenjaga) {
     debugger;
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + idPenjaga + "?" + document.cookie)
       .subscribe((res: Response) => {
