@@ -21,14 +21,14 @@ export class FiturkoseditComponent implements OnInit {
   ngOnInit() {
     this.idFiturkos;
     this.dataFiturkosEdit;
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + this.idFiturkos + "?" + document.cookie)
+    this.http.get('http://localhost:8889/api/fiturkos/' + this.idFiturkos + "?" + document.cookie)
       .subscribe((res: Response) => {
         this.dataFiturkosEdit = res.json();
       })
   }
 
   EditFiturkos(id) {
-    this.http.put('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + id + "?" + document.cookie, this.dataFiturkosEdit)
+    this.http.put('http://localhost:8889/api/fiturkos/' + id + "?" + document.cookie, this.dataFiturkosEdit)
       .subscribe((res: Response) => {
         window.location.href = "./fiturkos";
       })

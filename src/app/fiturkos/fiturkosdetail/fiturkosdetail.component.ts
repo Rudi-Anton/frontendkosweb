@@ -21,7 +21,7 @@ export class FiturkosdetailComponent implements OnInit {
   ngOnInit() {
     this.idFiturkos;
    
-      this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + this.idFiturkos + "?" + document.cookie)
+      this.http.get('http://localhost:8889/api/fiturkos/' + this.idFiturkos + "?" + document.cookie)
         .subscribe((res: Response) => {
           this.dataFiturkosDetail = res.json();
           

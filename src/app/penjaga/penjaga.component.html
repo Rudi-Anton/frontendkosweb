@@ -1,37 +1,39 @@
-<div class="panel panel-success">
-    <h1 align="center">Data Penjaga</h1>
-    <hr> &ensp;
-    <a class="btn btn-info" (click)="PenjagaData()" data-toggle="modal" data-target="#myModalCreate"><span class="glyphicon glyphicon-plus"></span></a>
-    <table class="table">
-        <thead>
-            <tr>
-                <td>
-                    <h3>Kode Penjaga</h3>
-                </td>
-                <td>
-                    <h3>Nama Penjaga</h3>
-                </td>
-                <td>
-                    <h3>Aksi</h3>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of dataPenjaga">
-                <td>
-                    <h4>{{item.KdPenjaga}}</h4>
-                </td>
-                <td>
-                    <h4>{{item.NamaPenjaga}}</h4>
-                </td>
-                <td>
-                    <a class="btn btn-success" (click)="PenjagaDetail(item._id)" data-toggle="modal" data-target="#myModalDetail"><span class="glyphicon glyphicon-search"></span></a>
-                    <a class="btn btn-info"  (click)="EditData(item._id)" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <button class="btn btn-danger" type="button" (click)="PenjagaDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="col-md-11">
+    <div class="panel panel-success">
+        <h1 align="center">Data Penjaga</h1>
+        <hr> &ensp;
+        <a class="btn btn-info" (click)="PenjagaData()" data-toggle="modal" data-target="#myModalCreate"><span class="glyphicon glyphicon-plus"></span></a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        <h3>Kode Penjaga</h3>
+                    </td>
+                    <td>
+                        <h3>Nama Penjaga</h3>
+                    </td>
+                    <td>
+                        <h3>Aksi</h3>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataPenjaga">
+                    <td>
+                        <h4>{{item.KdPenjaga}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{item.NamaPenjaga}}</h4>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" (click)="PenjagaDetail(item.KdPenjaga,item.KdKos)" data-toggle="modal" data-target="#myModalDetail"><span class="glyphicon glyphicon-search"></span></a>
+                        <a class="btn btn-info" (click)="EditData(item._id)" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <button class="btn btn-danger" type="button" (click)="PenjagaDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Modal create -->
@@ -65,6 +67,28 @@
                                 <input [(ngModel)]="dataPenjagaCreate.NamaPenjaga" name="NamaPenjaga" type="text" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Alamat</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaCreate.Alamat" name="Alamat" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">No Hp</label>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="dataPenjagaCreate.NoHp" name="NoHp" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Jenis Kelamin</label>
+                            <div class="col-sm-6">
+                                <select [(ngModel)]="dataPenjagaCreate.JenisKelamin" name="JenisKelamin" type="text" class="form-control">
+                                    <option [ngValue]="default" disabled>Pilih</option>
+                                    <option value="laki-laki">laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </form>
@@ -92,19 +116,43 @@
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">Kode Penjaga</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="kdPenjaga" value={{dataPenjagaDetail.KdPenjaga}} readonly>
+                            <input type="text" class="form-control" name="kdPenjaga" value={{dataPenjagaDetail[0].KdPenjaga}} readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="KdKos" value={{dataPenjagaDetail.KdKos}} readonly>
+                            <input type="text" class="form-control" name="KdKos" value={{dataPenjagaDetail[0].KdKos}} readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">Nama Penjaga</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="namaPenjaga" value={{dataPenjagaDetail.NamaPenjaga}} readonly>
+                            <input type="text" class="form-control" name="namaPenjaga" value={{dataPenjagaDetail[0].NamaPenjaga}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Alamat</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Alamat" value={{dataPenjagaDetail[0].Alamat}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">No Hp</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="NoHp" value={{dataPenjagaDetail[0].NoHp}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Jenis Kelamin</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="JenisKelamin" value={{dataPenjagaDetail[0].JenisKelamin}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Nama Kos</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="namaPenjaga" value={{dataPenjagaDetail[0].infoKos[0].NamaKos}} readonly>
                         </div>
                     </div>
                 </form>
@@ -127,28 +175,50 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Edit Penjaga</h4>
             </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form" *ngIf="dataPenjagaEdit">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Kode Penjaga</label>
-                            <div class="col-sm-8">
-                                <input [(ngModel)]="dataPenjagaEdit.KdPenjaga" name="KdPenjaga" type="text" class="form-control">
-                            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataPenjagaEdit">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Kode Penjaga</label>
+                        <div class="col-sm-8">
+                            <input [(ngModel)]="dataPenjagaEdit.KdPenjaga" name="KdPenjaga" type="text" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Kode Kos</label>
-                            <div class="col-sm-8">
-                                <input [(ngModel)]="dataPenjagaEdit.KdKos" name="KdKos" type="text" class="form-control">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Kode Kos</label>
+                        <div class="col-sm-8">
+                            <input [(ngModel)]="dataPenjagaEdit.KdKos" name="KdKos" type="text" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Nama Penjaga</label>
-                            <div class="col-sm-8">
-                                <input [(ngModel)]="dataPenjagaEdit.NamaPenjaga" name="NamaPenjaga" type="text" class="form-control">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Nama Penjaga</label>
+                        <div class="col-sm-8">
+                            <input [(ngModel)]="dataPenjagaEdit.NamaPenjaga" name="NamaPenjaga" type="text" class="form-control">
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Alamat</label>
+                        <div class="col-sm-8">
+                            <input [(ngModel)]="dataPenjagaEdit.Alamat" name="Alamat" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">No Hp</label>
+                        <div class="col-sm-8">
+                            <input [(ngModel)]="dataPenjagaEdit.NoHp" name="NoHp" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Jenis Kelamin</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataPenjagaEdit.JenisKelamin" name="JenisKelamin" type="text" class="form-control" id="TV">
+                                <option *ngFor="let item of dataPenjagaEdit" [ngValue]="default">{{item.JenisKelamin}}</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-success" (click)="PenjagaUbah(dataPenjagaEdit._id,dataPenjagaEdit)" type="submit">Ubah</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

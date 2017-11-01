@@ -12,6 +12,7 @@ import { Data } from './fiturkoscreatemodel';
 export class FiturkoscreateComponent implements OnInit {
 
   dataFiturkosCreate: Data;
+  //dataFitur: Object;
   constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -21,11 +22,22 @@ export class FiturkoscreateComponent implements OnInit {
     let header = new Headers({ 'Content-Type': 'application/json' });
     let opsi = new RequestOptions({ headers: header });
     //let data = JSON.stringify({kdFiturkos : kode, NamaFiturkos : nama});
-    debugger;
-    this.http.post('https://kosannarutosasuke.herokuapp.com/api/fiturkos' + '?' + document.cookie, JSON.stringify(this.dataFiturkosCreate), opsi)
+    //debugger;
+    this.http.post('http://localhost:8889/api/fiturkos' + '?' + document.cookie, JSON.stringify(this.dataFiturkosCreate), opsi)
       .subscribe((res: Response) => {
         window.location.href = "./fiturkos";
-        debugger;
+        // let KdKos = dataFiturkosCreate.KdKos
+        // debugger;
+        // this.http.get('http://localhost:8889/api/fiturkos/jumlah/' + KdKos + "?" + document.cookie)
+        //   .subscribe((res: Response) => {
+        //     //this.dataFitur = res.json();
+        //     debugger;
+        //     let dataFitur = res.json().Jumlah
+        //     this.http.put('http://localhost:8889/api/kos/' + KdKos + "?" + document.cookie, dataFitur)
+        //       .subscribe((res: Response) => {
+        //         debugger;
+        //       })
+        //   })
       })
   }
 }

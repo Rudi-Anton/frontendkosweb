@@ -1,29 +1,249 @@
-<div  class="panel panel-success">
-    <h2 align="center">Data Fiturkos</h2>
-    <hr>
-    &ensp;<a class="btn btn-info" href [routerLink]="['/fiturkoscreate']"><span class="glyphicon glyphicon-plus"></span></a>
-    <table class="table" style="width:50%">
-        <thead>
-            <tr>
-                <td>
-                    <h3>Kode Kos</h3>
-                </td>
-                <td>
-                    <h3>Aksi</h3>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of dataFiturkos">
-                <td>
-                    <h4>{{item.KdKos}}</h4>
-                </td>
-                <td>
-                    <a class="btn btn-success" href [routerLink]="['/fiturkosdetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
-                    <a class="btn btn-info" href [routerLink]="['/fiturkosedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <button class="btn btn-danger" type="button" (click)="FiturkosDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="col-md-11">
+    <div class="panel panel-success">
+        <h2 align="center">Data Fiturkos</h2>
+        <hr>
+        <a class="btn btn-info" (click)="FiturkosData()" data-toggle="modal" data-target="#myModalCreate"><span class="glyphicon glyphicon-plus"></span></a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        <h3>Kode Kos</h3>
+                    </td>
+                    <td>
+                        <h3>Aksi</h3>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataFiturkos">
+                    <td>
+                        <h4>{{item.KdKos}}</h4>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" (click)="FiturKosDetail(item._id)" data-toggle="modal" data-target="#myModalDetail"><span class="glyphicon glyphicon-search"></span></a>
+                        <a class="btn btn-info" (click)="EditData(item._id)" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <button class="btn btn-danger" type="button" (click)="FiturkosDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal create -->
+<div id="myModalCreate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tambah Fiturkos</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataFiturkosCreate">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosCreate.KdKos" type="text" name="KdKos" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Air</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosCreate.Air" name="Air" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Internet</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosCreate.Internet" name="Internet" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Listrik</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosCreate.Listrik" name="Listrik" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kamar Mandi</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataFiturkosCreate.KamarMandi" name="KamarMandi" type="text" class="form-control" id="KamarMandi">
+                                    <option [ngValue]="default" disabled>Pilih</option>
+                                    <option value="Dalam">Dalam</option>
+                                    <option value="Luar">Luar</option>
+                                    </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kulkas</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataFiturkosCreate.Kulkas" name="Kulkas" type="text" class="form-control" id="Kulkas">
+                                    <option [ngValue]="default" disabled>Pilih</option>
+                                    <option value="true">Ada</option>
+                                    <option value="false">Tidak Ada</option>
+                                    </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">TV</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataFiturkosCreate.TV" name="TV" type="text" class="form-control" id="TV">
+                                    <option [ngValue]="default" disabled>Pilih</option>
+                                    <option value="true">Ada</option>
+                                    <option value="false">Tidak Ada</option>
+                                    </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="FiturkosCreate(dataFiturkosCreate)" type="submit">Tambah</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal Detail -->
+<div id="myModalDetail" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:lightslategrey">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="color:azure; font-size:200%; text-align:center">Detail Fiturkos</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataFiturkosDetail">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="kdKos" value={{dataFiturkosDetail.KdKos}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Air</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Air" value={{dataFiturkosDetail.Air}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Internet</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Internet" value={{dataFiturkosDetail.Internet}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Listrik</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Listrik" value={{dataFiturkosDetail.Listrik}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kamar Mandi</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="KamarMandi" value={{dataFiturkosDetail.KamarMandi}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kulkas</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Kulkas" value={{dataFiturkosDetail.Kulkas}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">TV</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="TV" value={{dataFiturkosDetail.TV}}>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color:lightslategrey">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Edit -->
+<div id="myModalEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Fiturkos</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataFiturkosEdit">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kode Kos</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosEdit.KdKos" type="text" class="form-control" id="kdKos" name="Kdkos" value={{dataFiturkosEdit.KdKos}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Air</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosEdit.Air" type="number" class="form-control" name="Air" id="Air" value={{dataFiturkosEdit.Air}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Internet</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosEdit.Internet" type="number" class="form-control" name="Internet" id="Internet" value={{dataFiturkosEdit.Internet}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Listrik</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="dataFiturkosEdit.Listrik" name="Listrik" type="number" class="form-control" id="Listrik" value={{dataFiturkosEdit.Listrik}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kamar Mandi</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataFiturkosEdit.KamarMandi" name="KamarMandi" type="text" class="form-control" id="KamarMandi">
+                                    <option value="Dalam">Dalam</option>
+                                    <option value="Luar">Luar</option>
+                                    </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Kulkas</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataFiturkosEdit.Kulkas" name="Kulkas" type="text" class="form-control" id="Kulkas">
+                                <option *ngFor="let item of dataFiturkosEdit" [ngValue]="default">{{item.Kulkas}}</option>
+                                <option value="true">Ada</option>
+                                <option value="false">Tidak Ada</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">TV</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="dataFiturkosEdit.TV" name="TV" type="text" class="form-control" id="TV">
+                                    <option *ngFor="let item of dataFiturkosEdit" [ngValue]="default">{{item.TV}}</option>
+                                    <option value="true">Ada</option>
+                                    <option value="false">Tidak Ada</option>
+                                    </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="FiturkosUbah(dataFiturkosEdit._id)" type="submit">Ubah</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+
+    </div>
 </div>
