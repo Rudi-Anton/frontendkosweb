@@ -22,13 +22,13 @@ export class FiturkosComponent implements OnInit {
   constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:8889/api/fiturkos' + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataFiturkos = res.json();
       })
   }
   FiturkosDelete(idFiturkos) {
-    this.http.delete('http://localhost:8889/api/fiturkos/' + idFiturkos + "?" + document.cookie)
+    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idFiturkos + "?" + localStorage.token)
       .subscribe((res: Response) => {
         window.location.href = "./fiturkos";
       })
@@ -40,7 +40,7 @@ export class FiturkosComponent implements OnInit {
 
   FiturKosDetail(id) {
 
-    this.http.get('http://localhost:8889/api/fiturkos/' + id + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + id + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataFiturkosDetail = res.json();
 
@@ -53,8 +53,7 @@ export class FiturkosComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-      let dataTambah = dataFiturkosCreate.Air;
-      this.http.get('http://localhost:8889/api/fiturkos/kode/' + dataFiturkosCreate.KdKos + "?" + document.cookie)
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/kode/' + dataFiturkosCreate.KdKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
           this.dataFiturkos = res.json();
           debugger;
@@ -62,18 +61,37 @@ export class FiturkosComponent implements OnInit {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });
 
-            this.http.post('http://localhost:8889/api/fiturkos' + '?' + document.cookie, JSON.stringify(this.dataFiturkosCreate), opsi)
+            this.http.post('https://kosannarutosasuke.herokuapp.com/api/fiturkos' + '?' + localStorage.token, JSON.stringify(this.dataFiturkosCreate), opsi)
               .subscribe((res: Response) => {
                 let KdKos = res.json().KdKos;
+                let a = res.json().Air;
+                a = a + res.json().Listrik;
+                a = a + res.json().Internet;
+                if (res.json().KamarMandi == "Dalam") {
+                  a = a + 100000;
+                } else {
+                  a = a;
+                }
+                if (res.json().TV == true) {
+                  a = a + 1000000;
+                } else {
+                  a = a;
+                }
+                if (res.json().Kulkas == true) {
+                  a = a + 500000;
+                } else {
+                  a = a;
+                }
                 //window.location.href = "./fiturkos";
                 debugger;
-                this.http.get('http://localhost:8889/api/kos/kode/' + KdKos + "?" + document.cookie)
+                this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode/' + KdKos + "?" + localStorage.token)
                   .subscribe((res: Response) => {
                     debugger;
                     this.dataKos = res.json();
-                    this.dataKos[0].Pendapatan = this.dataKos[0].Pendapatan + this.dataFiturkos[0].Air;
+                    this.dataKos[0].Pendapatan = this.dataKos[0].Pendapatan + a;
+                    let idKos = this.dataKos[0]._id;
                     debugger;
-                    this.http.put('http://localhost:8889/api/kos/kode/' + KdKos + "?" + document.cookie, this.dataKos)
+                    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token, this.dataKos[0])
                       .subscribe((res: Response) => {
                         debugger;
                         window.location.href = "./fiturkos";
@@ -90,18 +108,17 @@ export class FiturkosComponent implements OnInit {
 
   EditData(idPenjaga) {
     debugger;
-    this.http.get('http://localhost:8889/api/fiturkos/' + idPenjaga + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idPenjaga + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataFiturkosEdit = res.json();
       })
   }
 
   FiturkosUbah(id) {
-    this.http.put('http://localhost:8889/api/fiturkos/' + id + "?" + document.cookie, this.dataFiturkosEdit)
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + id + "?" + localStorage.token, this.dataFiturkosEdit)
       .subscribe((res: Response) => {
         window.location.href = "./fiturkos";
       })
-    // }
   }
 
 }

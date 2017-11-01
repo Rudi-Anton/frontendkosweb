@@ -15,7 +15,7 @@ export class GajipenjagaComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:8889/api/gajipenjaga' + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataGaji = res.json();
       })
@@ -23,14 +23,14 @@ export class GajipenjagaComponent implements OnInit {
 
   EditData(idPenjaga) {
     debugger;
-    this.http.get('http://localhost:8889/api/gajipenjaga/' + idPenjaga + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga/' + idPenjaga + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataGajipenjagaEdit = res.json();
       })
   }
 
   EditGajipenjaga(id) {
-    this.http.put('http://localhost:8889/api/gajipenjaga/' + id + "?" + document.cookie, this.dataGajipenjagaEdit)
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/gajipenjaga/' + id + "?" + localStorage.token, this.dataGajipenjagaEdit)
       .subscribe((res: Response) => {
         window.location.href = "./gajipenjaga";
       })

@@ -19,7 +19,7 @@ export class PenjagaComponent implements OnInit {
   constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:8889/api/penjaga?' + localStorage.token)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga?' + localStorage.token)
       .subscribe((res: Response) => {
         this.dataPenjaga = res.json();
         //debugger;
@@ -35,7 +35,7 @@ export class PenjagaComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-      this.http.get('http://localhost:8889/api/penjaga/kode/' + dataPenjagaCreate.KdPenjaga + "?" + document.cookie)
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/kode/' + dataPenjagaCreate.KdPenjaga + "?" + localStorage.token)
         .subscribe((res: Response) => {
           this.dataPenjaga = res.json();
           debugger;
@@ -43,7 +43,7 @@ export class PenjagaComponent implements OnInit {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });
             //debugger;
-            this.http.post('http://localhost:8889/api/penjaga/' + '?' + document.cookie, JSON.stringify(this.dataPenjagaCreate), opsi)
+            this.http.post('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + '?' + localStorage.token, JSON.stringify(this.dataPenjagaCreate), opsi)
               .subscribe((res: Response) => {
                 window.location.href = "./penjaga";
                 debugger;
@@ -58,7 +58,7 @@ export class PenjagaComponent implements OnInit {
 
   PenjagaDetail(kdpenjaga, kdkos) {
     debugger;
-    this.http.get('http://localhost:8889/api/penjaga/kos/' + kdpenjaga + '/' + kdkos + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/kos/' + kdpenjaga + '/' + kdkos + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataPenjagaDetail = res.json();
         debugger;
@@ -68,7 +68,7 @@ export class PenjagaComponent implements OnInit {
 
   PenjagaDelete(idPenjaga) {
     if (confirm("Apakah yakin ingin menghapus ini?") == true) {
-      this.http.delete('http://localhost:8889/api/penjaga/' + idPenjaga + "?" + document.cookie)
+      this.http.delete('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + idPenjaga + "?" + localStorage.token)
         .subscribe((res: Response) => {
           window.location.href = "./penjaga";
         })
@@ -77,7 +77,7 @@ export class PenjagaComponent implements OnInit {
 
   PenjagaEdit(idPenjaga) {
     debugger;
-    this.http.get('http://localhost:8889/api/penjaga/' + idPenjaga + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + idPenjaga + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataPenjagaEdit = res.json();
       })
@@ -89,7 +89,7 @@ export class PenjagaComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-      this.http.put('http://localhost:8889/api/penjaga/' + id + "?" + document.cookie, dataPenjagaEdit)
+      this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + id + "?" + localStorage.token, dataPenjagaEdit)
         .subscribe((res: Response) => {
           window.location.href = "./penjaga";
         })
