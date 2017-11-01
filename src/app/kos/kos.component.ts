@@ -19,7 +19,7 @@ export class KosComponent implements OnInit {
   constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos' + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataKos = res.json();
       })
@@ -37,7 +37,7 @@ export class KosComponent implements OnInit {
       let header = new Headers({ 'Content-Type': 'application/json' });
       let opsi = new RequestOptions({ headers: header });
       //debugger;
-      this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + document.cookie, JSON.stringify(this.dataKosCreate), opsi)
+      this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + localStorage.token, JSON.stringify(this.dataKosCreate), opsi)
         .subscribe((res: Response) => {
           window.location.href = "./kos";
           debugger;
@@ -47,7 +47,7 @@ export class KosComponent implements OnInit {
 
   KosDetail(idKos) {
     debugger;
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataKosDetail = res.json();
 
@@ -57,7 +57,7 @@ export class KosComponent implements OnInit {
 
   KosDelete(idKos) {
     if (confirm("Apakah yakin ingin menghapus ini?") == true) {
-      this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
+      this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
           window.location.href = "./kos";
         })
@@ -66,7 +66,7 @@ export class KosComponent implements OnInit {
 
   KosEdit(idKos) {
     debugger;
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataKosEdit = res.json();
       })
@@ -77,7 +77,7 @@ export class KosComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + id + "?" + document.cookie, dataKosEdit)
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + id + "?" + localStorage.token, dataKosEdit)
       .subscribe((res: Response) => {
         window.location.href = "./kos";
       })

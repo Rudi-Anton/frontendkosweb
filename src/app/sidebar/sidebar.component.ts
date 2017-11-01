@@ -35,7 +35,7 @@ export class SidebarComponent implements OnInit {
     let header = new Headers({ 'Content-Type': 'application/json' });
     let opsi = new RequestOptions({ headers: header });
     //let dataLogin = JSON.stringify({NamaPengguna:namapengguna, KunciPengguna:kuncipengguna});
-    this.http.post('http://localhost:8889/api/login/authenticate', JSON.stringify(dataLogin), opsi)
+    this.http.post('https://kosannarutosasuke.herokuapp.com/api/login/authenticate', JSON.stringify(dataLogin), opsi)
       .subscribe((res: Response) => {
         //document.cookie = "token=" + res.json().token;
         localStorage.setItem('token', "token=" + res.json().token);

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
+import { ActivatedRoute, Routes } from '@angular/router';
+import { Data } from './kamarmodel';
 
 @Component({
   selector: 'app-kamar',
@@ -8,22 +10,77 @@ import { Http, Response } from '@angular/http';
 })
 export class KamarComponent implements OnInit {
 
+  dataKamarCreate: Data;
   dataKamar: Object;
+  dataKamarDetail: Object;
+  dataKamarEdit: Object;
   idKamar: String;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kamar' + "?" + document.cookie)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kamar' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataKamar = res.json();
       })
   }
-  KamarDelete(idKamar) {
-    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kamar/' + idKamar + "?" + document.cookie)
+
+  KamarData() {
+    this.dataKamarCreate = new Data();
+  }
+
+  KamarCreate(dataKamarCreate) {
+    if (dataKamarCreate.KdKamar==null || dataKamarCreate.KdKamar==null || dataKamarCreate.NamaKamar==null) { 
+      alert("Data Masih ada yang kosong");
+    }
+    else {
+      let header = new Headers({ 'Content-Type': 'application/json' });
+      let opsi = new RequestOptions({ headers: header });
+      //debugger;
+      this.http.post('https://kosannarutosasuke.herokuapp.com/api/kamar/' + '?' + localStorage.token, JSON.stringify(this.dataKamarCreate), opsi)
+        .subscribe((res: Response) => {
+          window.location.href = "./kamar";
+          debugger;
+        })
+    }
+  }
+
+  KamarDetail(idKamar) {
+    debugger;
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kamar/' + idKamar + "?" + localStorage.token)
       .subscribe((res: Response) => {
-        window.location.href = "./kamar";
+        this.dataKamarDetail = res.json();
+
       })
   }
 
+
+  KamarDelete(idKamar) {
+    if (confirm("Apakah yakin ingin menghapus ini?") == true) {
+      this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kamar/' + idKamar + "?" + localStorage.token)
+        .subscribe((res: Response) => {
+          window.location.href = "./kamar";
+        })
+    }
+  }
+
+  KamarEdit(idKamar) {
+    debugger;
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/kamar/' + idKamar + "?" + localStorage.token)
+      .subscribe((res: Response) => {
+        this.dataKamarEdit = res.json();
+      })
+  }
+
+  KamarUbah(id,dataKamarEdit) {
+    if (dataKamarEdit.KdKamar=="" || dataKamarEdit.KdKamar=="" || dataKamarEdit.NamaKamar=="") { 
+      alert("Data Masih ada yang kosong");
+    }
+    else {
+    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kamar/' + id + "?" + localStorage.token, dataKamarEdit)
+      .subscribe((res: Response) => {
+        window.location.href = "./kamar";
+      })
+    }
+  }
 }

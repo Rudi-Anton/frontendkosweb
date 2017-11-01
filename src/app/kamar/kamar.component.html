@@ -1,44 +1,248 @@
 <div class="panel panel-success">
-  <h1 align="center">Data Kamar Kos</h1>
-  <hr>
-  &ensp;<a class="btn btn-info" href [routerLink]="['/kamarcreate']"><span class="glyphicon glyphicon-plus"></span></a>
-  <table class="table">
-      <thead>
-          <tr>
-              <td>
-                  <h3>Kode Kos</h3>
-              </td>
-              <td>
-                  <h3>Kode Kamar</h3>
-              </td>
-             
-              <td>
-                  <h3>Tagihan</h3>
-              </td>
-              <td>
-                  <h3>Aksi</h3>
-              </td>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let item of dataKamar">
-              <td>
-                  <h4>{{item.KdKos}}</h4>
-          </td>
-              <td>
-                  <h4>{{item.KdKamarKos}}</h4>
-              </td>
-              
-              
-            <td>
-              <h4>{{item.Tagihan}}</h4>
-          </td>
-              <td>
-                  <a class="btn btn-success" href [routerLink]="['/kamardetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
-                  <a class="btn btn-info" href [routerLink]="['/kamaredit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
-                  <button class="btn btn-danger" type="button" (click)="KamarDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
-              </td>
-          </tr>
-      </tbody>
-  </table>
+    <h1 align="center">Data Kamar Kos</h1>
+    <hr> &ensp;
+    <a class="btn btn-info" (click)="KamarData()" data-toggle="modal" data-target="#myModalCreate">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    <h3>Kode Kos</h3>
+                </td>
+                <td>
+                    <h3>Kode Kamar</h3>
+                </td>
+
+                <td>
+                    <h3>Tagihan</h3>
+                </td>
+                <td>
+                    <h3>Aksi</h3>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of dataKamar">
+                <td>
+                    <h4>{{item.KdKos}}</h4>
+                </td>
+                <td>
+                    <h4>{{item.KdKamarKos}}</h4>
+                </td>
+
+
+                <td>
+                    <h4>{{item.Tagihan}}</h4>
+                </td>
+                <td>
+                    <a class="btn btn-success" (click)="KamarDetail(item._id)" data-toggle="modal" data-target="#myModalDetail">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                    <a class="btn btn-info" (click)="KamarEdit(item._id)" data-toggle="modal" data-target="#myModalEdit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <button class="btn btn-danger" type="button" (click)="KamarDelete(item._id)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Create Kamar-->
+<div id="myModalCreate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Content of Creating Kamar dialogue -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Form Kamar Baru</h4>
+            </div>
+            <form role=form *ngIf="dataKamarCreate">
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Kode Kos</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataKamarCreate.KdKos" type="text" name="KdKos" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Kode Kamar</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataKamarCreate.KdKamar" type="text" name="KdKamarKos" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">AC</label>
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="dataKamarCreate.AC" type="text" name="AC" class="form-control">
+                                    <option value="true">Ada</option>
+                                    <option value="false">Tidak Ada</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Laundry</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataKamarCreate.CuciPakaian" type="text" name="CuciPakaian" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Tagihan</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataKamarCreate.Tagihan" type="text" name="Tagihan" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Bukti Transfer</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataKamarCreate.BuktiTagihan" type="text" name="BuktiTagihan" class="form-control">
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="KamarCreate(dataKamarCreate)" type="submit">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Penghuni -->
+<div id="myModalDetail" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Detail Kamar</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" *ngIf="dataKamarDetail">
+                        <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-1 control-label">Kode Kos</label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" id="KdKos" value={{dataKamarDetail.KdKos}} readonly>
+                  </div>
+              </div>
+              <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-1 control-label">Kode Kamar Kos</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="KdKamarKos" readonly value={{dataKamarDetail.KdKamarKos}}>
+                      </div>
+                  </div>
+    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-1 control-label">AC</label>
+                      <div class="col-sm-4">
+                            <input type="text" class="form-control" id="AC" readonly  value={{dataKamarDetail.AC}}> 
+                      </div>
+                  </div>
+               <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-1 control-label">Laundry</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="CuciPakaian" readonly value={{dataKamarDetail.CuciPakaian}}>
+                      </div>
+                  </div>
+    
+    
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-1 control-label">Tagihan</label>
+                    <div class="col-sm-10">
+                        <input type="text"  class="form-control" id="Tagihan" readonly value={{dataKamarDetail.Tagihan}}>
+                            
+                    </div>
+                </div>
+                  
+    
+              <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-1 control-label">Bukti Tagihan</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="BuktiTagihan" readonly value={{dataKamarDetail.BuktiTagihan}}>
+                      </div>
+                  </div>
+    
+                 
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Edit Penghuni-->
+<div id="myModalEdit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Kamar</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" *ngIf="dataKamarEdit">
+                        <div class="form-group">
+                      <label class="col-sm-1 control-label">Kode Kos</label>
+                      <div class="col-sm-10">
+                          <input [(ngModel)]="dataKamarEdit.KdKos" name="KdKos" type="text" class="form-control">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-1 control-label">Kode Kamar Kos</label>
+                      <div class="col-sm-10">
+                          <input [(ngModel)]="dataKamarEdit.KdKamarKos" name="KdKamarKos" type="text" class="form-control">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-1 control-label">AC</label>
+                    <div class="col-sm-10">
+                      <select [(ngModel)]="dataKamarEdit.AC" name="AC" class="form-control">
+                          <option value="true">Ada</option>
+                          <option value="false">Tidak Ada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-1 control-label">Laundry</label>
+                  <div class="col-sm-10">
+                      <input [(ngModel)]="dataKamarEdit.CuciPakaian" name="CuciPakaian" type="text" class="form-control">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-1 control-label">Tagihan</label>
+                <div class="col-sm-4">
+                      <input [(ngModel)]="dataKamarEdit.Tagihan" name="Tagihan" type="text" class="form-control">
+                    
+                  </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">Bukti Tagihan</label>
+                <div class="col-sm-4">
+                      <input [(ngModel)]="dataKamarEdit.BuktiTagihan" name="BuktiTagihan" type="text" class="form-control">
+                    
+                  </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="KamarUbah(dataKamarEdit._id,dataKamarEdit)" type="submit">Ubah</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+    </div>
+</div>
+
+</div>
 </div>

@@ -1,7 +1,9 @@
 <div class="panel panel-success">
     <h1 align="center">Data Penghuni</h1>
-    <hr>
-    &ensp;<a class="btn btn-info" href [routerLink]="['/penghunicreate']"><span class="glyphicon glyphicon-plus"></span></a>
+    <hr> &ensp;
+    <a class="btn btn-info" (click)="PenghuniData()" data-toggle="modal" data-target="#myModalCreate">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
     <table class="table">
         <thead>
             <tr>
@@ -11,7 +13,7 @@
                 <td>
                     <h3>Kode Kamar</h3>
                 </td>
-                
+
                 <td>
                     <h3>Nama</h3>
                 </td>
@@ -25,22 +27,236 @@
 
                 <td>
                     <h4>{{item.KdKos}}</h4>
-            </td>
+                </td>
                 <td>
                     <h4>{{item.KdKamarKos}}</h4>
                 </td>
-               
-                
-              <td>
-                <h4>{{item.NamaPenghuni}}</h4>
-            </td>
+
+
                 <td>
-                    <a class="btn btn-success" href [routerLink]="['/penghunidetail/',item._id]"><span class="glyphicon glyphicon-search"></span></a>
-                    <a class="btn btn-info" href [routerLink]="['/penghuniedit/',item._id]"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <button class="btn btn-danger" type="button" (click)="PenghuniDelete(item._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                    <h4>{{item.NamaPenghuni}}</h4>
+                </td>
+                <td>
+                    <a class="btn btn-success" (click)="PenghuniDetail(item._id)" data-toggle="modal" data-target="#myModalDetail">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                    <a class="btn btn-info" (click)="PenghuniEdit(item._id)" data-toggle="modal" data-target="#myModalEdit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <button class="btn btn-danger" type="button" (click)="PenghuniDelete(item._id)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
                 </td>
             </tr>
         </tbody>
     </table>
-  </div>
-  
+</div>
+
+<!-- Create Penghuni-->
+<div id="myModalCreate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Content of Creating Penghuni dialogue -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Form Penghuni Baru</h4>
+            </div>
+            <form role=form *ngIf="dataPenghuniCreate">
+                <div class="modal-body">
+                    <form class="form-horizontal">
+
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Kode Kos</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.KdKos" type="text" name="KdKos" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Kode Kamar Kos</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.KdKamarKos" type="text" name="KdKamarKos" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Nama Penghuni</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.NamaPenghuni" type="text" name="NamaPenghuni" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">TGLKos</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.TGLKos" type="date" name="TGLKos" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">No. KTP</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.NoKTP" type="text" name="NoKTP" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">No. HP</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.NoHP" type="text" name="NoHP" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Nama Bank</label>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="dataPenghuniCreate.NamaBank" type="text" name="NamaBank" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="PenghuniCreate(dataPenghuniCreate)" type="submit">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Penghuni -->
+<div id="myModalDetail" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detail Penghuni</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataPenghuniDetail">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Kode Kos</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="KdKos" value={{dataPenghuniDetail.KdKos}} readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Kode Kamar Kos</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="KdKamarKos" readonly value={{dataPenghuniDetail.KdKamarKos}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Nama Penghuni</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="NamaPenghuni" readonly value={{dataPenghuniDetail.NamaPenghuni}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Tanggal Kos</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="TGLKos" readonly value={{dataPenghuniDetail.TGLKos}}>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">No. KTP</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NoKTP" readonly value={{dataPenghuniDetail.NoKTP}}>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">No. HP</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NoHP" readonly value={{dataPenghuniDetail.NoHP}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Nama Bank</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NamaBank" readonly value={{dataPenghuniDetail.NamaBank}}>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Edit Penghuni-->
+<div id="myModalEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Penghuni</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" *ngIf="dataPenghuniEdit">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Kode Kos</label>
+                        <div class="col-sm-10">
+                            <input [(ngModel)]="dataPenghuniEdit.KdKos" name="KdKos" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Kode Kamar Kos</label>
+                        <div class="col-sm-10">
+                            <input [(ngModel)]="dataPenghuniEdit.KdKamarKos" name="KdKamarKos" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Nama Penghuni</label>
+                        <div class="col-sm-10">
+                            <input [(ngModel)]="dataPenghuniEdit.NamaPenghuni" name="NamaPenghuni" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">TGLKos</label>
+                        <div class="col-sm-10">
+                            <input [(ngModel)]="dataPenghuniEdit.TGLKos" name="TGLKos" type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">NoKTP</label>
+                        <div class="col-sm-4">
+                            <input [(ngModel)]="dataPenghuniEdit.NoKTP" name="NoKTP" type="text" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">No. HP</label>
+                        <div class="col-sm-4">
+                            <input [(ngModel)]="dataPenghuniEdit.NoHP" name="NoHP" type="text" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Nama Bank</label>
+                        <div class="col-sm-4">
+                            <input [(ngModel)]="dataPenghuniEdit.NamaBank" name="NamaBank" type="text" class="form-control">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="PenghuniUbah(dataPenghuniEdit._id,dataPenghuniEdit)" type="submit">Ubah</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+
+    </div>
+</div>

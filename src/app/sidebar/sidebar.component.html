@@ -105,7 +105,8 @@
             <input [(ngModel)]="dataLogin.Username" name="Username" type="text" placeholder="Enter Username" name="uname" required><br/>
 
             <label><b>Password</b></label><br/>
-            <input [(ngModel)]="dataLogin.Password" name="Password" type="password" placeholder="Enter Password" required><br/>
+            <input [(ngModel)]="dataLogin.Password" name="Password" onmousedown="this.type='text'" onmouseup="this.type='password'"
+                                onmousemove="this.type='password'" placeholder="Enter Password" required><br/>
 
             <button class="btn btn-success" (click)="Login(dataLogin)" type="submit">Login</button><br/>
             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
