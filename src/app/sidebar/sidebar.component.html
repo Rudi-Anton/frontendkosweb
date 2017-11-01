@@ -23,72 +23,74 @@
         </form>-->
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li>
-                <a (click)="Logiin()" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
+        <div>
+            <ul class="sidebar-menu">
+                <li class="header">MAIN NAVIGATION</li>
+                <li id="login">
+                    <a (click)="Logiin()" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
                 <i class="glyphicon glyphicon-log-in"></i> <span>Login</span>
                 <span class="pull-right-container">
                 </span>
                 </a>
-            </li>
-            <li>
-                <a href [routerLink]="['/kos']">
+                </li>
+                <li id="Kos">
+                    <a href [routerLink]="['/kos']">
                     <i class="glyphicon glyphicon-home"></i> <span>Kos</span>
                     <span class="pull-right-container">
                     </span>
                   </a>
-            </li>
-            <li>
-                <a href [routerLink]="['/kamar']">
+                </li>
+                <li id="Kamar">
+                    <a href [routerLink]="['/kamar']">
                         <i class="glyphicon glyphicon-home"></i> <span>Kamar</span>
                         <span class="pull-right-container">
                         </span>
                       </a>
-            </li>
-            <li>
-                <a href [routerLink]="['/penghuni']">
+                </li>
+                <li id="Penghuni">
+                    <a href [routerLink]="['/penghuni']">
                             <i class="glyphicon glyphicon-home"></i> <span>Penghuni</span>
                             <span class="pull-right-container">
                             </span>
                           </a>
-            </li>
-            <li>
-                <a href [routerLink]="['/penjaga']">
+                </li>
+                <li id="Penjaga">
+                    <a href [routerLink]="['/penjaga']">
                 <i class="glyphicon glyphicon-user"></i> <span>Penjaga</span>
                 <span class="pull-right-container">
                 </span>
               </a>
-            </li>
-            <li>
-                <a href [routerLink]="['/gajipenjaga']">
+                </li>
+                <li id="Gaji">
+                    <a href [routerLink]="['/gajipenjaga']">
                 <i class="glyphicon glyphicon-usd"></i> <span>Gaji Penjaga</span>
                 <span class="pull-right-container">
                 </span>
               </a>
-            </li>
-            <li>
-                <a href [routerLink]="['/fiturkos']">
+                </li>
+                <li id="Fitur">
+                    <a href [routerLink]="['/fiturkos']">
                 <i class="glyphicon glyphicon-globe"></i> <span>Fitur Kos</span>
                 <span class="pull-right-container">
                 </span>
               </a>
-            </li>
-            <li>
-                <a (click)="Logout()" style="width:auto;">
+                </li>
+                <li id="logout">
+                    <a (click)="Logout()" style="width:auto;">
                 <i class="glyphicon glyphicon-log-out"></i> <span>Logout</span>
                 <span class="pull-right-container">
                 </span>
                 </a>
-            </li>
-            <!--<li>
+                </li>
+                <!--<li>
                 <a href [routerLink]="['/variasiobat']">
                 <i class="glyphicon glyphicon-user"></i> <span>Variasi Obat</span>
                 <span class="pull-right-container">
                 </span>
               </a>
             </li>-->
-        </ul>
+            </ul>
+        </div>
     </section>
     <!-- /.sidebar -->
 </aside>
