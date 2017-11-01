@@ -75,7 +75,7 @@ export class PenjagaComponent implements OnInit {
     }
   }
 
-  EditData(idPenjaga) {
+  PenjagaEdit(idPenjaga) {
     debugger;
     this.http.get('http://localhost:8889/api/penjaga/' + idPenjaga + "?" + document.cookie)
       .subscribe((res: Response) => {
