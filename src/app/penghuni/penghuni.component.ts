@@ -15,14 +15,37 @@ export class PenghuniComponent implements OnInit {
   dataPenghuniDetail: Object;
   dataPenghuniEdit: Object;
   idPenghuni: String;
+  today: Date;
+  todayy: String;
 
   constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
+   this.today = new Date();
+    var dd = this.today.getDate();
+    var mm = this.today.getMonth() + 1; //January is 0!
+    var yyyy = this.today.getFullYear();
+    if(dd<10){
+      var stringdd='0'+dd
+    } 
+    if(mm<10){
+      var stringmm='0'+mm
+    } 
+    if(dd>=10){
+      var stringdd= ''+dd
+    } 
+    if(mm>=10){
+      var stringmm= ''+mm
+    } 
+    this.todayy = yyyy + '-' +stringmm + '-' + stringdd;
+    
+    console.log(this.todayy);
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/penghuni' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataPenghuni = res.json();
       })
+
+    
   }
 
   PenghuniData() {
@@ -30,7 +53,7 @@ export class PenghuniComponent implements OnInit {
   }
 
   PenghuniCreate(dataPenghuniCreate) {
-    if (dataPenghuniCreate.KdPenghuni==null || dataPenghuniCreate.KdPenghuni==null || dataPenghuniCreate.NamaPenghuni==null) { 
+    if (dataPenghuniCreate.KdPenghuni == null || dataPenghuniCreate.KdPenghuni == null || dataPenghuniCreate.NamaPenghuni == null) {
       alert("Data Masih ada yang kosong");
     }
     else {
@@ -72,15 +95,15 @@ export class PenghuniComponent implements OnInit {
       })
   }
 
-  PenghuniUbah(id,dataPenghuniEdit) {
-    if (dataPenghuniEdit.KdPenghuni=="" || dataPenghuniEdit.KdPenghuni=="" || dataPenghuniEdit.NamaPenghuni=="") { 
+  PenghuniUbah(id, dataPenghuniEdit) {
+    if (dataPenghuniEdit.KdPenghuni == "" || dataPenghuniEdit.KdPenghuni == "" || dataPenghuniEdit.NamaPenghuni == "") {
       alert("Data Masih ada yang kosong");
     }
     else {
-    this.http.put('https://kosannarutosasuke.herokuapp.com/api/penghuni/' + id + "?" + localStorage.token, dataPenghuniEdit)
-      .subscribe((res: Response) => {
-        window.location.href = "./penghuni";
-      })
+      this.http.put('https://kosannarutosasuke.herokuapp.com/api/penghuni/' + id + "?" + localStorage.token, dataPenghuniEdit)
+        .subscribe((res: Response) => {
+          window.location.href = "./penghuni";
+        })
     }
   }
 }

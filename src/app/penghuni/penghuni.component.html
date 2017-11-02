@@ -1,3 +1,14 @@
+<body>
+    <script>
+        angular.module('dateInputExample', [])
+          .controller('DateController', ['$scope', function($scope) {
+            $scope.example = {
+              value: new Date(2015, 3, 22),
+              currentDate: new Date()
+            };
+          }]);
+     </script>
+
 <div class="panel panel-success">
     <h1 align="center">Data Penghuni</h1>
     <hr> &ensp;
@@ -88,7 +99,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">TGLKos</label>
                             <div class="col-sm-9">
-                                <input [(ngModel)]="dataPenghuniCreate.TGLKos" type="date" name="TGLKos" class="form-control">
+                                <input [(ngModel)]="dataPenghuniCreate.TGLKos" type="date" id="TGLKos" name="TGLKos" max={{this.todayy}} class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -106,7 +117,13 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Nama Bank</label>
                             <div class="col-sm-9">
-                                <input [(ngModel)]="dataPenghuniCreate.NamaBank" type="text" name="NamaBank" class="form-control">
+                                <select [(ngModel)]="dataPenghuniCreate.NamaBank" name="NamaBank" class="form-control">
+                                    <option value="BNI">BNI (Bank Negara Indonesia)</option>
+                                    <option value="BCA">BCA (Bank Central Asia)</option>
+                                    <option value="BRI">BRI (Bank Rakyat Indonesia)</option>
+                                    <option value="Bank Mandiri">Bank Mandiri</option>
+                                    
+                                </select>
                             </div>
                         </div>
                     </form>
@@ -133,33 +150,33 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form" *ngIf="dataPenghuniDetail">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">Kode Kos</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Kode Kos</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="KdKos" value={{dataPenghuniDetail.KdKos}} readonly>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">Kode Kamar Kos</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Kode Kamar Kos</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="KdKamarKos" readonly value={{dataPenghuniDetail.KdKamarKos}}>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">Nama Penghuni</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Nama Penghuni</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="NamaPenghuni" readonly value={{dataPenghuniDetail.NamaPenghuni}}>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">Tanggal Kos</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Kos</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="TGLKos" readonly value={{dataPenghuniDetail.TGLKos}}>
+                            <input type="text" class="form-control" id="TGLKos" max={{this.todayy}} readonly value={{dataPenghuniDetail.TGLKos}}>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">No. KTP</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">No. KTP</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="NoKTP" readonly value={{dataPenghuniDetail.NoKTP}}>
 
@@ -168,13 +185,13 @@
 
 
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">No. HP</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">No. HP</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="NoHP" readonly value={{dataPenghuniDetail.NoHP}}>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-1 control-label">Nama Bank</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Nama Bank</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="NamaBank" readonly value={{dataPenghuniDetail.NamaBank}}>
                         </div>
@@ -205,49 +222,55 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form" *ngIf="dataPenghuniEdit">
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">Kode Kos</label>
+                        <label class="col-sm-2 control-label">Kode Kos</label>
                         <div class="col-sm-10">
                             <input [(ngModel)]="dataPenghuniEdit.KdKos" name="KdKos" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">Kode Kamar Kos</label>
+                        <label class="col-sm-2 control-label">Kode Kamar Kos</label>
                         <div class="col-sm-10">
                             <input [(ngModel)]="dataPenghuniEdit.KdKamarKos" name="KdKamarKos" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">Nama Penghuni</label>
+                        <label class="col-sm-2 control-label">Nama Penghuni</label>
                         <div class="col-sm-10">
                             <input [(ngModel)]="dataPenghuniEdit.NamaPenghuni" name="NamaPenghuni" class="form-control">
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">TGLKos</label>
+                        <label class="col-sm-2 control-label">TGLKos</label>
                         <div class="col-sm-10">
-                            <input [(ngModel)]="dataPenghuniEdit.TGLKos" name="TGLKos" type="date" class="form-control">
+                            <input [(ngModel)]="dataPenghuniEdit.TGLKos" id="TGLKos" max="2017-11-02"name="TGLKos" type="date" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">NoKTP</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-2 control-label">NoKTP</label>
+                        <div class="col-sm-10">
                             <input [(ngModel)]="dataPenghuniEdit.NoKTP" name="NoKTP" type="text" class="form-control">
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">No. HP</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-2 control-label">No. HP</label>
+                        <div class="col-sm-10">
                             <input [(ngModel)]="dataPenghuniEdit.NoHP" name="NoHP" type="text" class="form-control">
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">Nama Bank</label>
-                        <div class="col-sm-4">
-                            <input [(ngModel)]="dataPenghuniEdit.NamaBank" name="NamaBank" type="text" class="form-control">
-
+                        <label class="col-sm-2 control-label">Nama Bank</label>
+                        <div class="col-sm-10">
+                           
+                            <select [(ngModel)]="dataPenghuniEdit.NamaBank" name="NamaBank" class="form-control">
+                                <option value="BNI">BNI (Bank Negara Indonesia)</option>
+                                <option value="BCA">BCA (Bank Central Asia)</option>
+                                <option value="BRI">BRI (Bank Rakyat Indonesia)</option>
+                                <option value="Bank Mandiri">Bank Mandiri</option>
+                                
+                            </select>
                         </div>
                     </div>
                 </form>
@@ -260,3 +283,4 @@
 
     </div>
 </div>
+</body>

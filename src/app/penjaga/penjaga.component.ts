@@ -38,7 +38,7 @@ export class PenjagaComponent implements OnInit {
       this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/kode/' + dataPenjagaCreate.KdPenjaga + "?" + localStorage.token)
         .subscribe((res: Response) => {
           this.dataPenjaga = res.json();
-          debugger;
+          //debugger;
           if (this.dataPenjaga == "") {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });

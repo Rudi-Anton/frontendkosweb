@@ -19,6 +19,8 @@ export class KosComponent implements OnInit {
   constructor(private http: Http, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataKos = res.json();
@@ -34,13 +36,23 @@ export class KosComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-      let header = new Headers({ 'Content-Type': 'application/json' });
-      let opsi = new RequestOptions({ headers: header });
-      //debugger;
-      this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + localStorage.token, JSON.stringify(this.dataKosCreate), opsi)
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode/' + dataKosCreate.KdKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
-          window.location.href = "./kos";
-          debugger;
+          this.dataKos = res.json();
+          //debugger;
+          if (this.dataKos == "") {
+            let header = new Headers({ 'Content-Type': 'application/json' });
+            let opsi = new RequestOptions({ headers: header });
+            //debugger;
+            this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + localStorage.token, JSON.stringify(this.dataKosCreate), opsi)
+              .subscribe((res: Response) => {
+                window.location.href = "./kos";
+                debugger;
+              })
+          }
+          else {
+            alert("Kos Dengan Kode Kos Tersebut Sudah Ada");
+          }
         })
     }
   }
