@@ -54,33 +54,27 @@ export class PenghuniComponent implements OnInit {
   }
 
   PenghuniCreate(dataPenghuniCreate) {
-    if (dataPenghuniCreate.KdKos == null || dataPenghuniCreate.KdKos == null || dataPenghuniCreate.NamaPenghuni == null) {
+    if (dataPenghuniCreate.KdKos==null || dataPenghuniCreate.KdKamarKos==null || dataPenghuniCreate.NamaPenghuni==null
+    || dataPenghuniCreate.TGLKos==null|| dataPenghuniCreate.NoKTP ==null|| dataPenghuniCreate.NoHP ==null || dataPenghuniCreate.NamaBank==null ) { 
       alert("Data Masih ada yang kosong");
     }
     else {
       this.http.get('https://kosannarutosasuke.herokuapp.com/api/penghuni/kode/' + dataPenghuniCreate.KdKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
-          this.dataPenghuni = res.json();
-          if (this.dataPenghuni == "") {
+          this.dataKos = res.json();
+          debugger;
+          if (this.dataKos != "") {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });
-
-            this.http.post('https://kosannarutosasuke.herokuapp.com/api/penghuni' + '?' + localStorage.token, JSON.stringify(this.dataPenghuniCreate), opsi)
+            
+            this.http.post('https://kosannarutosasuke.herokuapp.com/api/penghuni/' + '?' + localStorage.token, JSON.stringify(this.dataPenghuniCreate), opsi)
               .subscribe((res: Response) => {
-                let KdKos = res.json().KdKos;
-                let a = res.json().Tagihan;
-
-                this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode' + KdKos + "?" + localStorage.token)
-                  .subscribe((res: Response) => {
-                    this.dataKos = res.json();
-                    this.dataKos[0].Pendapatan = this.dataKos[0].Pendapatan + a;
-                    let idKos = this.dataKos[0]._id;
-                    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos' + idKos + "?" + localStorage.token, this.dataKos[0])
-                      .subscribe((res: Response) => {
-                        window.location.href = "./penghuni";
-                      })
-                  })
+                window.location.href = "./penghuni";
+                debugger;
               })
+          }
+          else {
+            alert("Kos Dengan Kode Kos Tersebut Tidak Ada");
           }
         })
     }
