@@ -3,12 +3,10 @@ import { Http, Response, Request ,Headers, RequestOptions} from '@angular/http';
 
 export class Data {
     public _id : string;
-    public KdKos : string;
-    public NamaKos: string;
-    public KategoriKos: string;
-    public JmlKamar:number;
-    public Location:string;
-    public Latitude: number;
-    public Longitude: number;
-    public Pendapatan: number;
+    public KdKamarKos: string;
+    public KdKos: string;
+    public AC: boolean;
+    public Tagihan: number;
+    public CuciPakaian: number;
+    public BuktiTagihan: string
 }
