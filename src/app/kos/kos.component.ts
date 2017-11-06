@@ -39,11 +39,11 @@ export class KosComponent implements OnInit {
       this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode/' + dataKosCreate.KdKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
           this.dataKos = res.json();
-          //debugger;
+          debugger;
           if (this.dataKos == "") {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });
-            //debugger;
+            
             this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + localStorage.token, JSON.stringify(this.dataKosCreate), opsi)
               .subscribe((res: Response) => {
                 window.location.href = "./kos";
@@ -68,6 +68,7 @@ export class KosComponent implements OnInit {
 
 
   KosDelete(idKos) {
+    debugger;
     if (confirm("Apakah yakin ingin menghapus ini?") == true) {
       this.http.delete('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
@@ -85,6 +86,7 @@ export class KosComponent implements OnInit {
   }
 
   KosUbah(id,dataKosEdit) {
+    debugger;
     if (dataKosEdit.KdKos=="" || dataKosEdit.KdKos=="" || dataKosEdit.NamaKos=="") { 
       alert("Data Masih ada yang kosong");
     }

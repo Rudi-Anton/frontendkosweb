@@ -31,7 +31,7 @@ export class KamarComponent implements OnInit {
   }
 
   KamarCreate(dataKamarCreate) {
-    if (dataKamarCreate.KdKos == null ||  dataKamarCreate.KdKamar == null) {
+    if (dataKamarCreate.KdKos == null ||  dataKamarCreate.KdKamarKos == null) {
       alert("Data Masih ada yang kosong");
     }
     else {
