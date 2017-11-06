@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { Data } from './penjagamodel';
+import * as $ from 'jquery';
+import 'datatables.net';
 
 @Component({
   selector: 'app-penjaga',
@@ -22,6 +24,9 @@ export class PenjagaComponent implements OnInit {
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga?' + localStorage.token)
       .subscribe((res: Response) => {
         this.dataPenjaga = res.json();
+        $(document).ready(function () {
+          $('#penjaga').DataTable();
+        });
         //debugger;
       })
   }
@@ -31,18 +36,19 @@ export class PenjagaComponent implements OnInit {
   }
 
   PenjagaCreate(dataPenjagaCreate) {
-    if (dataPenjagaCreate.KdPenjaga == null || dataPenjagaCreate.KdKos == null || dataPenjagaCreate.NamaPenjaga == null) {
+    if (dataPenjagaCreate.KdPenjaga == null || dataPenjagaCreate.KdKos == null || dataPenjagaCreate.NamaPenjaga == null
+      || dataPenjagaCreate.JenisKelamin == null || dataPenjagaCreate.Alamat == null || dataPenjagaCreate.NoHp == null) {
       alert("Data Masih ada yang kosong");
     }
     else {
       this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/kode/' + dataPenjagaCreate.KdPenjaga + "?" + localStorage.token)
         .subscribe((res: Response) => {
           this.dataPenjaga = res.json();
-          //debugger;
+          debugger;
           if (this.dataPenjaga == "") {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });
-            //debugger;
+            debugger;
             this.http.post('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + '?' + localStorage.token, JSON.stringify(this.dataPenjagaCreate), opsi)
               .subscribe((res: Response) => {
                 window.location.href = "./penjaga";

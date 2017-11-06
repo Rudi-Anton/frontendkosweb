@@ -21,7 +21,11 @@
       "styles": [
         "./Scripts/bootstrap/dist/css/bootstrap.css",
         "./dist/css/AdminLTE.min.css",
-        "./dist/css/skins/_all-skins.min.css"
+        "./dist/css/skins/_all-skins.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
+        "../node_modules/datatables.net-bs/css/dataTables.bootstrap.css",
+        "../node_modules/datatables.net-select-bs/css/select.bootstrap.css"
       ],
       "scripts": [
         "./Scripts/jquery/dist/jquery.js",
