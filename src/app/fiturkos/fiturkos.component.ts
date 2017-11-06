@@ -28,10 +28,49 @@ export class FiturkosComponent implements OnInit {
       })
   }
   FiturkosDelete(idFiturkos) {
-    this.http.delete('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idFiturkos + "?" + localStorage.token)
-      .subscribe((res: Response) => {
-        window.location.href = "./fiturkos";
-      })
+    if (confirm("Apakah yakin ingin menghapus ini?") == true) {
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idFiturkos + "?" + localStorage.token)
+        .subscribe((res: Response) => {
+          let KdKos = res.json().KdKos;
+          let y = res.json().Air;
+          y = y + res.json().Listrik;
+          y = y + res.json().Internet;
+          if (res.json().KamarMandi == "Dalam") {
+            y = y + 100000;
+          } else {
+            y = y;
+          }
+          if (res.json().TV == true) {
+            y = y + 100000;
+          } else {
+            y = y;
+          }
+          if (res.json().Kulkas == true) {
+            y = y + 100000;
+          } else {
+            y = y;
+          }
+          //ambil data yang akan diupdate
+          this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode/' + KdKos + "?" + localStorage.token)
+            .subscribe((res: Response) => {
+              debugger;
+              this.dataKos = res.json();
+              this.dataKos[0].Pendapatan = this.dataKos[0].Pendapatan + y;
+              let idKos = this.dataKos[0]._id;
+              debugger;
+              //update pendapatan pada tabel kos
+              this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token, this.dataKos[0])
+                .subscribe((res: Response) => {
+                  //delet data
+                  this.http.delete('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idFiturkos + "?" + localStorage.token)
+                    .subscribe((res: Response) => {
+                      window.location.href = "./fiturkos";
+                    })
+                })
+            })
+        })
+
+    }
   }
 
   FiturkosData() {
@@ -73,12 +112,12 @@ export class FiturkosComponent implements OnInit {
                   a = a;
                 }
                 if (res.json().TV == true) {
-                  a = a + 1000000;
+                  a = a + 100000;
                 } else {
                   a = a;
                 }
                 if (res.json().Kulkas == true) {
-                  a = a + 500000;
+                  a = a + 100000;
                 } else {
                   a = a;
                 }
@@ -88,7 +127,7 @@ export class FiturkosComponent implements OnInit {
                   .subscribe((res: Response) => {
                     debugger;
                     this.dataKos = res.json();
-                    this.dataKos[0].Pendapatan = this.dataKos[0].Pendapatan + a;
+                    this.dataKos[0].Pendapatan = this.dataKos[0].Pendapatan - a;
                     let idKos = this.dataKos[0]._id;
                     debugger;
                     this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + idKos + "?" + localStorage.token, this.dataKos[0])
