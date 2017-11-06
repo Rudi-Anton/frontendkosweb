@@ -40,14 +40,14 @@ export class SidebarComponent implements OnInit {
   }
 
   Login(dataLogin) {
-
     debugger;
     let header = new Headers({ 'Content-Type': 'application/json' });
     let opsi = new RequestOptions({ headers: header });
     this.http.post('https://kosannarutosasuke.herokuapp.com/api/login/authenticate', JSON.stringify(dataLogin), opsi)
       .subscribe((res: Response) => {
         localStorage.setItem('token', "token=" + res.json().token);
-        window.location.href = '/';
+          alert("Login Berhasil");
+          window.location.href = '/';
       });
   }
 

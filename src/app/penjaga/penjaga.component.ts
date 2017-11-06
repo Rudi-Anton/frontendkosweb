@@ -107,10 +107,21 @@ export class PenjagaComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-      this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + dataPenjagaEdit._id + "?" + localStorage.token, dataPenjagaEdit)
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/kode/' + dataPenjagaEdit.KdPenjaga + "?" + localStorage.token)
         .subscribe((res: Response) => {
-          window.location.href = "./penjaga";
+          this.dataPenjaga = res.json();
+          debugger;
+          if (this.dataPenjaga == "") {
+            this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + dataPenjagaEdit._id + "?" + localStorage.token, dataPenjagaEdit)
+              .subscribe((res: Response) => {
+                window.location.href = "./penjaga";
+              })
+          }
+          else {
+            alert("Kode Penjaga Sudah Ada");
+          }
         })
     }
+
   }
 }
