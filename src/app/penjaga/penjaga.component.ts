@@ -46,13 +46,23 @@ export class PenjagaComponent implements OnInit {
           this.dataPenjaga = res.json();
           debugger;
           if (this.dataPenjaga == "") {
-            let header = new Headers({ 'Content-Type': 'application/json' });
-            let opsi = new RequestOptions({ headers: header });
-            debugger;
-            this.http.post('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + '?' + localStorage.token, JSON.stringify(this.dataPenjagaCreate), opsi)
+            this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode/' + dataPenjagaCreate.KdKos + "?" + localStorage.token)
               .subscribe((res: Response) => {
-                window.location.href = "./penjaga";
+                this.dataPenjaga = res.json();
                 debugger;
+                if (this.dataPenjaga != "") {
+                  let header = new Headers({ 'Content-Type': 'application/json' });
+                  let opsi = new RequestOptions({ headers: header });
+                  debugger;
+                  this.http.post('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + '?' + localStorage.token, JSON.stringify(this.dataPenjagaCreate), opsi)
+                    .subscribe((res: Response) => {
+                      window.location.href = "./penjaga";
+                      debugger;
+                    })
+                }
+                else {
+                  alert("Kode Kos Tidak tersedia");
+                }
               })
           }
           else {
@@ -86,16 +96,18 @@ export class PenjagaComponent implements OnInit {
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + idPenjaga + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataPenjagaEdit = res.json();
+        debugger;
       })
   }
 
-  PenjagaUbah(id, dataPenjagaEdit) {
+  PenjagaUbah(dataPenjagaEdit) {
     debugger;
-    if (dataPenjagaEdit.KdPenjaga == "" || dataPenjagaEdit.KdKos == "" || dataPenjagaEdit.NamaPenjaga == "") {
+    if (dataPenjagaEdit.KdPenjaga == "" || dataPenjagaEdit.KdKos == "" || dataPenjagaEdit.NamaPenjaga == ""
+      || dataPenjagaEdit.JenisKelamin == "" || dataPenjagaEdit.Alamat == "" || dataPenjagaEdit.NoHp == "") {
       alert("Data Masih ada yang kosong");
     }
     else {
-      this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + id + "?" + localStorage.token, dataPenjagaEdit)
+      this.http.put('https://kosannarutosasuke.herokuapp.com/api/penjaga/' + dataPenjagaEdit._id + "?" + localStorage.token, dataPenjagaEdit)
         .subscribe((res: Response) => {
           window.location.href = "./penjaga";
         })
