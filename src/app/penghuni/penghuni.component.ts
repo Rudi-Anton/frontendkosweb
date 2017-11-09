@@ -59,7 +59,7 @@ export class PenghuniComponent implements OnInit {
       alert("Data Masih ada yang kosong");
     }
     else {
-      this.http.get('https://kosannarutosasuke.herokuapp.com/api/penghuni/kode/' + dataPenghuniCreate.KdKos + "?" + localStorage.token)
+      this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos/kode/' + dataPenghuniCreate.KdKos + "?" + localStorage.token)
         .subscribe((res: Response) => {
           this.dataKos = res.json();
           debugger;

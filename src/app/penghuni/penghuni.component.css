@@ -1,0 +1,14 @@
+.modal-dialog {
+    width: 80%
+}
+
+.modal-title{
+    color:white; 
+    font-size:200%; 
+    text-align:center
+}
+
+.modal-header,.modal-footer{
+    background-color: rgb(21, 67, 110);
+}
+

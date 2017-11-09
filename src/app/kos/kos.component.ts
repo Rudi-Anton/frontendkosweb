@@ -20,7 +20,7 @@ export class KosComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/kos' + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataKos = res.json();
@@ -32,7 +32,7 @@ export class KosComponent implements OnInit {
   }
 
   KosCreate(dataKosCreate) {
-    if (dataKosCreate.KdKos==null || dataKosCreate.KdKos==null || dataKosCreate.NamaKos==null) { 
+    if (dataKosCreate.KdKos == null || dataKosCreate.NamaKos == null || dataKosCreate.Location == null || dataKosCreate.JmlKamar == null || dataKosCreate.KategoriKos == null) {
       alert("Data Masih ada yang kosong");
     }
     else {
@@ -43,7 +43,7 @@ export class KosComponent implements OnInit {
           if (this.dataKos == "") {
             let header = new Headers({ 'Content-Type': 'application/json' });
             let opsi = new RequestOptions({ headers: header });
-            
+
             this.http.post('https://kosannarutosasuke.herokuapp.com/api/kos/' + '?' + localStorage.token, JSON.stringify(this.dataKosCreate), opsi)
               .subscribe((res: Response) => {
                 window.location.href = "./kos";
@@ -85,16 +85,16 @@ export class KosComponent implements OnInit {
       })
   }
 
-  KosUbah(id,dataKosEdit) {
+  KosUbah(id, dataKosEdit) {
     debugger;
-    if (dataKosEdit.KdKos=="" || dataKosEdit.KdKos=="" || dataKosEdit.NamaKos=="") { 
+    if (dataKosEdit.KdKos == "" || dataKosEdit.NamaKos == "") {
       alert("Data Masih ada yang kosong");
     }
     else {
-    this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + id + "?" + localStorage.token, dataKosEdit)
-      .subscribe((res: Response) => {
-        window.location.href = "./kos";
-      })
+      this.http.put('https://kosannarutosasuke.herokuapp.com/api/kos/' + id + "?" + localStorage.token, dataKosEdit)
+        .subscribe((res: Response) => {
+          window.location.href = "./kos";
+        })
     }
   }
 }

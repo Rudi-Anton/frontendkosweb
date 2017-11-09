@@ -1,9 +1,14 @@
+.modal-dialog {
+    width: 80%
+}
 
-#map{
-    height:100%;
+.modal-title{
+    color:white; 
+    font-size:200%; 
+    text-align:center
 }
-html, body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
+
+.modal-header,.modal-footer{
+    background-color: rgb(21, 67, 110);
 }
+
