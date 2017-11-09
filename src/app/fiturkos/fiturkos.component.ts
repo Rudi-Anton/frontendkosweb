@@ -157,9 +157,9 @@ export class FiturkosComponent implements OnInit {
     }
   }
 
-  EditData(idPenjaga) {
+  EditData(idfiturkos) {
     debugger;
-    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idPenjaga + "?" + localStorage.token)
+    this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + idfiturkos + "?" + localStorage.token)
       .subscribe((res: Response) => {
         this.dataFiturkosEdit = res.json();
         debugger;
@@ -167,6 +167,8 @@ export class FiturkosComponent implements OnInit {
   }
 
   FiturkosUbah(id) {
+    if(this.dataFiturkosEdit.KdKos == "" ||this.dataFiturkosEdit.Air == "" ||this.dataFiturkosEdit.Internet == "" ||
+      this.dataFiturkosEdit.KamarMandi == "" ||this.dataFiturkosEdit.Kulkas == "" ||this.dataFiturkosEdit.TV == "")
     //console.log(this.dataFiturkosEdit);
     this.http.get('https://kosannarutosasuke.herokuapp.com/api/fiturkos/' + id + "?" + localStorage.token)
       .subscribe((res: Response) => {
@@ -178,7 +180,7 @@ export class FiturkosComponent implements OnInit {
         let b = res.json().Listrik - this.dataFiturkosEdit.Listrik;
         let c = res.json().Internet - this.dataFiturkosEdit.Internet;
         let y = 0;
-        y = a + b + c;
+        y = y - (a + b + c);
         if (res.json().KamarMandi == "Luar" && this.dataFiturkosEdit.KamarMandi == "Dalam") {
           y = y + 100000;
         } else if (res.json().KamarMandi == "Dalam" && this.dataFiturkosEdit.KamarMandi == "Luar") {
@@ -187,17 +189,17 @@ export class FiturkosComponent implements OnInit {
         else {
           y = y;
         }
-        if (res.json().TV == false && this.dataFiturkosEdit.TV == true) {
+        if (res.json().TV == false && this.dataFiturkosEdit.TV == 'true') {
           y = y + 100000;
-        } else if (res.json().TV == true && this.dataFiturkosEdit.TV == false) {
+        } else if (res.json().TV == true && this.dataFiturkosEdit.TV == 'false') {
           y = y - 100000;
         }
         else {
           y = y;
         }
-        if (res.json().Kulkas == false && this.dataFiturkosEdit.Kulkas == true) {
+        if (res.json().Kulkas == false && this.dataFiturkosEdit.Kulkas == 'true') {
           y = y + 100000;
-        } else if (res.json().Kulkas == true && this.dataFiturkosEdit.Kulkas == false) {
+        } else if (res.json().Kulkas == true && this.dataFiturkosEdit.Kulkas == 'false') {
           y = y - 100000;
         }
         else {
